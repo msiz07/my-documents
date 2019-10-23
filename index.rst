@@ -16,10 +16,22 @@ Cloud Foundry
 
    cloudfoundry/*
 
+buildbot チュートリアル
+--------------------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   :glob:
+   :reversed:
+
+   buildbot/*
+
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-.. :: * :ref:`modindex`
 * :ref:`search`
+
+.. :: * :ref:`modindex`
