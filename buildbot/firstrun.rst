@@ -1,4 +1,4 @@
-.. first-run-label:
+.. _first-run-label:
 
 ==================================================
 First Run
@@ -192,7 +192,7 @@ worker の出力をチェックします。
 
 味見は既にできました、しかし、もっと興味を持っているはずです。
 設定を変更し実際のビルドを行う次のチュートリアルで、もう少しステップアップしましょう。
-`A Quick Tour <https://docs.buildbot.net/current/tutorial/tour.html#quick-tour-label>`_ へと続けてください。
+:ref:`quick-tour-label` へと続けてください。
 
 .. _git: https://git-scm.com/
 

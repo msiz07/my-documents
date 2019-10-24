@@ -12,7 +12,6 @@ Cloud Foundry
    :maxdepth: 2
    :caption: Contents:
    :glob:
-   :reversed:
 
    cloudfoundry/*
 
@@ -22,10 +21,9 @@ buildbot チュートリアル
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   :glob:
-   :reversed:
 
-   buildbot/*
+   buildbot/firstrun
+   buildbot/tour
 
 
 Indices and tables
