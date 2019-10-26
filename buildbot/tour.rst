@@ -129,27 +129,27 @@ buidbot を設定するとき間違えるのはよくあることなので、そ
     Reconfiguration failed. Please inspect the master.cfg file for errors,
     correct them, then try 'buildbot reconfig' again.
 
-This time, it's clear that there was a mistake in the configuration.
-Luckily, the Buildbot master will ignore the wrong configuration and keep running with the previous configuration.
+今回は、設定に誤りがあることが明らかです。
+幸運にも、 Buildbot の master は間違った設定は無視して、以前の設定で走り続けます。
 
-The message is clear enough, so open the configuration again, fix the error, and reconfig the master.
+メッセージは十分明確なので、設定ファイルを再び開いて、エラーを修正し、 master を reconfig してください。
+
 
 Your First Build
-----------------
+--------------------------------------------------
 
-By now you're probably thinking: "All this time spent and still not done a single build? What was the name of this project again?"
+この時点で恐らくこう考えているのではないでしょうか： 「これだけの時間を費やして、まだひとつもビルドしていない？このプロジェクトの名前 (訳注： buildbot と名前に build を含んでいる) は何だったんだ？」
 
-On the `Builders <http://localhost:8010/#/builders>`_ page, click on the runtests link.
-You'll see a builder page, and a blue "force" button that will bring up the
-following dialog box:
+`Builders <http://localhost:8010/#/builders>`_ ページ上で、 runtests リンクをクリックしてください。
+builder ページと、以下のダイアログボックスを呼び出す、青い「force」ボタンを見ることができるでしょう：
 
 .. image:: _images/force-build.png
    :alt: force a build.
 
-Click *Start Build* - there's no need to fill in any of the fields in this case.
-Next, click on `view in waterfall <http://localhost:8010/#/waterfall?show=runtests>`_.
+*Start Build*  をクリックしてください - 今回は、どの入力欄も記入する必要はありません。
+次に、 `view in waterfall <http://localhost:8010/#/waterfall?show=runtests>`_ をクリックしてくださ。
 
-You will now see:
+すると、以下のように表示されるでしょう：
 
 .. image:: _images/runtests-success.png
    :alt: an successful test run happened.
@@ -157,58 +157,58 @@ You will now see:
 Enabling the IRC Bot
 --------------------
 
-Buildbot includes an IRC bot that you can tell to join a channel and control to report on the status of buildbot.
+buildbot には、 channel に join するよう伝えて buidbot の状態の報告をコントロールできる IRC ボットが含まれています。
 
-.. note:: Security Note
+.. note:: セキュリティ上の注意
 
-    Please note that any user having access to your irc channel or can PM the bot will be able to create or stop builds :bug:`3377`.
+    あなたの irc channel へアクセスできるまたは bot を PM できるあらゆるユーザがビルドを作成および停止できることに注意してください :bug:`3377`。
 
-First, start an IRC client of your choice, connect to irc.freenode.net and join an empty channel.
-In this example we will use ``#buildbot-test``, so go join that channel.
-(*Note: please do not join the main buildbot channel!*)
+最初に、好きな IRC クライアントを開始して、 irc.freenode.net に接続して空の channel へ join します。
+この例では、 ``#buildbot-test`` を使用するので、その channel へ join します。
+( *注意：メインの buildbot channel へは join しないでください* )
 
-Edit :file:`master.cfg` and look for the *BUILDBOT SERVICES* section.
-At the end of that section add the lines::
+:file:`master.cfg` を編集して *BUILDBOT SERVICE* セクションを探してください。
+そのセクションの最後に以下の行を追加します::
 
   c['services'].append(reporters.IRC(host="irc.freenode.net", nick="bbtest",
                                      channels=["#buildbot-test"]))
 
-Reconfigure the build master then do:
+build master を reconfigure してから、以下を実施します：
 
 .. code-block:: bash
 
   grep -i irc master/twistd.log
 
-The log output should contain a line like this:
+ログ出力は以下のような行を含んでいるはずです：
 
 .. code-block:: none
 
   2016-11-13 15:53:06+0100 [-] Starting factory <buildbot.reporters.irc.IrcStatusFactory instance at 0x7ff2b4b72710>
   2016-11-13 15:53:19+0100 [IrcStatusBot,client] <buildbot.reporters.irc.IrcStatusBot object at 0x7ff2b5075750>: I have joined #buildbot-test
 
-You should see the bot now joining in your IRC client.
-In your IRC channel, type:
+このとき、bot が join していることを、 IRC クライアントで見られるはずです。
+IRC channel の中で、以下のように入力して：
 
 .. code-block:: none
 
   bbtest: commands
 
-to get a list of the commands the bot supports.
+bot がサポートするコマンドの一覧を取得します。
 
-Let's tell the bot to notify certain events, to learn which EVENTS we can notify on:
+どのイベントに対して通知ができるのか調べるために、ある種のイベントを通知するよう bot に伝えましょう：
 
 .. code-block:: none
 
   bbtest: help notify
 
-Now let's set some event notifications:
+それでは、いくつかイベント通知を設定しましょう：
 
 .. code-block:: irc
 
   <@lsblakk> bbtest: notify on started finished failure
   < bbtest> The following events are being notified: ['started', 'failure', 'finished']
 
-Now, go back to the web interface and force another build. Alternatively, ask the bot to force a build:
+それでは、 web インタフェースへ戻って、もうひとつの build を強制します。または (alternatively)、bot へビルドを強制するよう依頼します：
 
 .. code-block:: irc
 
@@ -216,22 +216,22 @@ Now, go back to the web interface and force another build. Alternatively, ask th
   < bbtest> build #1 of runtests started
   < bbtest> Hey! build runtests #1 is complete: Success [finished]
 
-You can also see the new builds in the web interface.
+このとき、web インタフェースでも新しいビルドを見ることができます。
 
 .. image:: _images/irc-testrun.png
    :alt: a successful test run from IRC happened.
 
-The full documentation is available at :bb:reporter:`IRC`.
+全部のドキュメントは :bb:reporter:`IRC` で利用可能です。
 
 Setting Authorized Web Users
-----------------------------
+--------------------------------------------------
 
-The default configuration allows everyone to perform any task like creating or stopping builds via the web interface. To restrict this to a user, look for::
+初期設定ではビルドの作成や停止など、 web インタフェースから誰でもどんなタスクも実行できます。これをあるユーザへ制限するには、以下の箇所を探して::
 
   c['www'] = dict(port=8010,
                    plugins=dict(waterfall_view={}, console_view={}))
 
-and append::
+以下を追加します::
 
   c['www']['authz'] = util.Authz(
           allowRules = [
@@ -243,10 +243,10 @@ and append::
   )
   c['www']['auth'] = util.UserPasswordAuth([('Alice','Password1')])
 
-For more details, see :ref:`Web-Authentication`.
+さらなる詳細は、 :ref:`Web-Authentication` を見てください。
 
 Debugging with Manhole
-----------------------
+--------------------------------------------------
 
 You can do some debugging by using manhole, an interactive Python shell.
 It exposes full access to the buildmaster's account (including the ability to modify and delete files), so it should not be enabled with a weak or easily guessable password.
