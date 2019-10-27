@@ -248,10 +248,10 @@ Setting Authorized Web Users
 Debugging with Manhole
 --------------------------------------------------
 
-You can do some debugging by using manhole, an interactive Python shell.
-It exposes full access to the buildmaster's account (including the ability to modify and delete files), so it should not be enabled with a weak or easily guessable password.
+インタラクティブな python シェル の manhole を使ってある程度デバッグができます。
+それは buildmaster のアカウントにフルアクセス (ファイルの変更および削除を含む) を与えるので、弱いまたは容易に推測できるパスワードでは有効にするべきではありません。
 
-To use this you will need to install an additional package or two to your virtualenv:
+使用するためには virtualenv に追加パッケージをいくつかインストールする必要があります。
 
 .. code-block:: bash
 
@@ -260,24 +260,24 @@ To use this you will need to install an additional package or two to your virtua
   pip install -U pip
   pip install cryptography pyasn1
 
-You will also need to generate an SSH host key for the Manhole server.
+manhole サーバのために SSH ホストキーを生成する必要もあります。
 
 .. code-block:: bash
 
   mkdir -p /data/ssh_host_keys
   ckeygen -t rsa -f /data/ssh_host_keys/ssh_host_rsa_key
 
-In your master.cfg find::
+master.cfgの中で以下の箇所を見つけてください::
 
   c = BuildmasterConfig = {}
 
-Insert the following to enable debugging mode with manhole::
+その後に manhole のデバッグモードを有効にするために以下を追加します::
 
   ####### DEBUGGING
   from buildbot import manhole
   c['manhole'] = manhole.PasswordManhole("tcp:1234:interface=127.0.0.1","admin","passwd", ssh_hostkey_dir="/data/ssh_host_keys/")
 
-After restarting the master, you can ssh into the master and get an interactive Python shell:
+master を再起動した後、 master に ssh って入りインタラクティブな Python シェルを使用できるようになります：
 
 .. code-block:: bash
 
@@ -285,34 +285,34 @@ After restarting the master, you can ssh into the master and get an interactive 
   # enter passwd at prompt
 
 .. note::
-    The pyasn1-0.1.1 release has a bug which results in an exception similar to
+    pyasn1-0.1.1 リリースにはバグがあり、開始時に以下に似た例外が生じます：
     this on startup:
 
     .. code-block:: none
 
         exceptions.TypeError: argument 2 must be long, not int
 
-    If you see this, the temporary solution is to install the previous version
+    もしこれを見つけたら、一時的な解決策は pyasn1 の以前のバージョンをインストールすることです：
     of pyasn1:
 
     .. code-block:: bash
 
         pip install pyasn1-0.0.13b
 
-If you wanted to check which workers are connected and what builders those workers are assigned to you could do::
+もし、どの worker が接続していて、どの builder がそれらの worker に割り当てられているかチェックしたいときは、以下のようしてできるはずです::
 
   >>> master.workers.workers
   {'example-worker': <Worker 'example-worker', current builders: runtests>}
 
-Objects can be explored in more depth using `dir(x)` or the helper function `show(x)`.
+`dir(x)` やヘルパー関数 `show(x)` を使用してオブジェクトをより詳細に調べることができます。
 
 Adding a 'try' scheduler
-------------------------
+--------------------------------------------------
 
-Buildbot includes a way for developers to submit patches for testing without committing them to the source code control system.
-(This is really handy for projects that support several operating systems or architectures.)
+buildbot は開発者がソースコードのバージョン管理システムへコミットせずにテスト用のパッチを提出する方法を含んでいます。
+(これは、いくつかのOSやアーキテクチャをプロジェクトにとって、とても便利です。)
 
-To set this up, add the following lines to master.cfg::
+これをセットアップするには、以下の数行を master.cfg に追加します::
 
   from buildbot.scheduler import Try_Userpass
   c['schedulers'] = []
@@ -322,9 +322,9 @@ To set this up, add the following lines to master.cfg::
                                       port=5555,
                                       userpass=[('sampleuser','samplepass')]))
 
-Then you can submit changes using the :bb:cmdline:`try` command.
+それから、 :bb:cmdline:`try` コマンドを使用して変更を提供できます。
 
-Let's try this out by making a one-line change to hello-world, say, to make it trace the tree by default:
+hello-world を 1 行変更して、試してみましょう。標準でツリーを追跡するようにします （Let's try this out by making a one-line change to hello-world, say, to make it trace the tree by default）:
 
 .. code-block:: bash
 
@@ -333,7 +333,7 @@ Let's try this out by making a one-line change to hello-world, say, to make it t
   $EDITOR __init__.py
   # change 'return "hello " + who' on line 6 to 'return "greets " + who'
 
-Then run buildbot's ``try`` command as follows:
+それから、 buildbot の ``try`` コマンドを実行します：
 
 .. code-block:: bash
 
@@ -341,14 +341,14 @@ Then run buildbot's ``try`` command as follows:
   source sandbox/bin/activate
   buildbot try --connect=pb --master=127.0.0.1:5555 --username=sampleuser --passwd=samplepass --vc=git
 
-This will do ``git diff`` for you and send the resulting patch to the server for build and test against the latest sources from Git.
+これは Git の最新ソースに対する ``git diff`` を実行した結果の patch を、ビルドおよびテストのためにサーバへ送信します。
 
-Now go back to the `waterfall <http://localhost:8010/#/waterfall>`_ page, click on the runtests link, and scroll down.
-You should see that another build has been started with your change (and stdout for the tests should be chock-full of parse trees as a result).
-The "Reason" for the job will be listed as "'try' job", and the blamelist will be empty.
+それでは `waterfall <http://localhost:8010/#/waterfall>`_ ページに戻って、 runtests のリンクをクリックし、下へスクロールしてください。
+もうひとつのビルドが変更を反映して開始ししていることを (そして結果としてツリーのパースで一杯になっているテストの標準出力を) 確認できるはずです。
+「try」ジョブとして、ジョブの「Reason」がリストになっていて、 blamelist が空になっているでしょう (The "Reason" for the job will be listed as "'try' job", and the blamelist will be empty)。
 
-To make yourself show up as the author of the change, use the ``--who=emailaddr`` option on ``buildbot try`` to pass your email address.
+変更の作者を表示させるには、  ``buildbot tryy`` で``--who=emailaddr`` オプションを使用して email アドレスを渡します。
 
-To make a description of the change show up, use the ``--properties=comment="this is a comment"`` option on ``buildbot try``.
+変更の説明を表示させるには、 ``buildbot try`` で ``--properties=comment="this is a comment"`` を使用します。
 
-To use ssh instead of a private username/password database, see :bb:sched:`Try_Jobdir`.
+プライベートな username/password データベースの代わりに ssh を使用するには、 :bb:sched: `Try_Jobdir` を参照してください。
