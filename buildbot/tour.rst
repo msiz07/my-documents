@@ -271,13 +271,13 @@ master.cfgの中で以下の箇所を見つけてください::
 
   c = BuildmasterConfig = {}
 
-その後に manhole のデバッグモードを有効にするために以下を追加します::
+その後に、 manhole のデバッグモードを有効にするために以下を追加します::
 
   ####### DEBUGGING
   from buildbot import manhole
   c['manhole'] = manhole.PasswordManhole("tcp:1234:interface=127.0.0.1","admin","passwd", ssh_hostkey_dir="/data/ssh_host_keys/")
 
-master を再起動した後、 master に ssh って入りインタラクティブな Python シェルを使用できるようになります：
+master を再起動した後、 master に ssh で入りインタラクティブな Python シェルを使用できるようになります：
 
 .. code-block:: bash
 
@@ -286,14 +286,12 @@ master を再起動した後、 master に ssh って入りインタラクティ
 
 .. note::
     pyasn1-0.1.1 リリースにはバグがあり、開始時に以下に似た例外が生じます：
-    this on startup:
 
     .. code-block:: none
 
         exceptions.TypeError: argument 2 must be long, not int
 
     もしこれを見つけたら、一時的な解決策は pyasn1 の以前のバージョンをインストールすることです：
-    of pyasn1:
 
     .. code-block:: bash
 
