@@ -523,7 +523,7 @@ bin/release
 
 .. Note::
 
-   ``web``\ コマンドは、Cloud Foundryがappを開始するときに、\ bash -c COMMAND</code>``\ として実行されます。開始コマンドのカスタマイズについてより詳細な情報は、(manifestの)\ `the command attribute <https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#start-commands>`_\ セクションを参照してください。
+   ``web``\ コマンドは、Cloud Foundryがappを開始するときに、\ bash -c COMMAND</code>``\ として実行されます。開始コマンドのカスタマイズについてより詳細な情報は、(manifestの)\ `the command attribute <https://docs.cloudfoundry.org/devguide/deploy-apps/manifest-attributes.html#start-commands>`_\ セクションを参照してください。
 
 
 ##################################################
