@@ -523,7 +523,7 @@ bin/release
 
 .. Note::
 
-   ``web``\ コマンドは、Cloud Foundryがappを開始するときに、\ bash -c COMMAND</code>``\ として実行されます。開始コマンドのカスタマイズについてより詳細な情報は、(manifestの)\ `the command attribute <https://docs.cloudfoundry.org/devguide/deploy-apps/manifest-attributes.html#start-commands>`_\ セクションを参照してください。
+   ``web``\ コマンドは、Cloud Foundryがappを開始するときに、\ ``bash -c COMMAND``\ として実行されます。開始コマンドのカスタマイズについてより詳細な情報は、(manifestの)\ `the command attribute <https://docs.cloudfoundry.org/devguide/deploy-apps/manifest-attributes.html#start-commands>`_\ セクションを参照してください。
 
 
 ##################################################
@@ -568,7 +568,7 @@ Cloud Foundryは、最初に位置するbuildpackが(appと)両立するbuildpac
   FAILED
   NoAppDetectedError
 
-Cloud Foundryがbuildpacktどのようにやり取りするかのより詳細な説明は、以下の\ `Sequence of Interactions`_\ セクションを参照ください。
+Cloud Foundryがbuildpackとどのようにやり取りするかのより詳細な説明は、以下の\ `Sequence of Interactions`_\ セクションを参照ください。
 
 
 ##################################################
@@ -582,7 +582,7 @@ No Buildpack Detection
 ==================================================
 .. _no-detection:
 
-開発者が、app manifestの中もしくは\ `cf push APP-NAME -b BUILDPACK-NAME`\ cf CLIコマンドの中で、1つ以上のbuildpackを指定した場合、Cloud Foundryはbuildpack detectedをスキップします。
+開発者が、app manifestの中もしくは\cf CLIコマンド `cf push APP-NAME -b BUILDPACK-NAME`\ の中で、1つ以上のbuildpackを指定した場合、Cloud Foundryはbuildpack detectedをスキップします。
 
 もしbuildpackを明示的に指定した場合、Cloud Foundryは以下のやり取りを実行します:
 
@@ -645,5 +645,5 @@ Buildpack Detection
 
 5. staging informationを決定するために\ ``/bin/release``\ を実行します
 
-このプロセスの最後に、\ ``deps``\ ディレクトリを、\ ``app``\ ディレクトリの隣にあるdropletのrootに含めます。
+このプロセスの最後には、dropletのrootで\ ``app``\ ディレクトリの隣へ、\ ``deps``\ ディレクトリを含めます。
 
