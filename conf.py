@@ -53,6 +53,8 @@ source_suffix = {
     '.txt': 'restructuredtext'
 }
 
+source_encoding = 'utf-8'
+
 # The master toctree document.
 master_doc = 'index'
 
@@ -102,11 +104,12 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 
+html_output_encoding = 'utf-8'
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'cf-materials'
+htmlhelp_basename = 'my-documents'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -133,7 +136,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'cf-materials.tex', u'cf-materials',
+    (master_doc, 'my-documents.tex', u'my-documents',
      u'msiz07', 'manual'),
 ]
 
@@ -143,7 +146,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'cf-materials', u'cf-materials',
+    (master_doc, 'my-documents', u'my-documents',
      [author], 1)
 ]
 
@@ -154,8 +157,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'cf-materials', u'cf-materials',
-     author, 'cf-materials', 'One line description of project.',
+    (master_doc, 'my-documents', u'my-documents',
+     author, 'my-documents', 'One line description of project.',
      'Miscellaneous'),
 ]
 
