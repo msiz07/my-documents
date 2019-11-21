@@ -19,7 +19,7 @@ Package Custom Buildpacks
 .. _packaging-custom-buildpacks:
 
 |CFAR|\ のbuildpackは、限定されたインターネット接続もしくはインターネット接続なしで動作できます。
-`buildpack-packager <https://github.com/cloudfoundry/libbuildpack/tree/master/packager>`_\ は、部分的にもしくは完全に切断された環境での動作を可能にする、\ |CFAR|\ のbuildpackと柔軟性を与えます。
+`buildpack-packager <https://github.com/cloudfoundry/libbuildpack/tree/master/packager>`_\ は、部分的にもしくは完全に切断された環境での動作を可能にする、\ |CFAR|\ のbuildpackと同等の柔軟性を与えます。
 
 ==================================================
 Use the Buildpack Packager
